@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>Main</title><link rel="stylesheet" href="css/Agda.css"></head><body><pre class="Agda"><a id="1" class="Symbol">{-#</a> <a id="5" class="Keyword">OPTIONS</a> <a id="13" class="Pragma">--rewriting</a> <a id="25" class="Symbol">#-}</a>
+<a id="29" class="Keyword">module</a> <a id="36" href="Main.html" class="Module">Main</a> <a id="41" class="Keyword">where</a>
+
+<a id="48" class="Comment">-- ** A simple definition of a bank ledger as a series of transactions: A —→⟨ v ⟩ B.</a>
+<a id="133" class="Comment">-- We model the ledger state as maps from participants to balances, using the abstract map interface in Prelude.Maps,</a>
+<a id="251" class="Comment">-- and define both operational and denotational semantics.</a>
+<a id="310" class="Comment">-- [Proofs]</a>
+<a id="322" class="Comment">--    * correspondence between operational and denotational semantics</a>
+<a id="392" class="Comment">--    * useful lemmas about the ledger-specific operation `transfer/[_∣_↦_]`</a>
+<a id="469" class="Keyword">open</a> <a id="474" class="Keyword">import</a> <a id="481" href="Ledger.html" class="Module">Ledger</a>
+
+<a id="489" class="Comment">-- ** A Hoare-style axiomatic semantics, based on a deep embedding of propositions.</a>
+<a id="573" class="Comment">-- We also provide some utilities for working with Hoare triples and convenient reasoning syntax.</a>
+<a id="671" class="Comment">-- [Proofs]</a>
+<a id="683" class="Comment">--   * correspondence with denotational semantics and, by transitivity, operational semantics.</a>
+<a id="778" class="Comment">--   * associativity/commutativity of separating conjuction _∗_</a>
+<a id="842" class="Keyword">open</a> <a id="847" class="Keyword">import</a> <a id="854" href="HoareLogic.html" class="Module">HoareLogic</a>
+
+<a id="866" class="Comment">-- ** Introduce the concept of disjointness for propositions, i.e. when the participants they refer to do not overlap,</a>
+<a id="985" class="Comment">-- which allows us to express the frame rule of Separation Logic (SL).</a>
+<a id="1056" class="Comment">-- [Proofs]</a>
+<a id="1068" class="Comment">--  * useful lemmas about separation, transferring values, etc...</a>
+<a id="1134" class="Comment">--  * the [FRAME] inference rule, which allows us to reason about a sub-formula and then inject the result in a larger context</a>
+<a id="1261" class="Keyword">open</a> <a id="1266" class="Keyword">import</a> <a id="1273" href="SL.html" class="Module">SL</a>
+
+<a id="1277" class="Comment">-- ** Define interleaving of two ledgers and prove the parallel rule of Concurrent Separation Logic (CSL).</a>
+<a id="1384" class="Comment">-- [Proofs]</a>
+<a id="1396" class="Comment">--  * the [PAR] inference rule, which utilizes [FRAME] to let us reason about disjoint ledgers independently/concurrently,</a>
+<a id="1519" class="Comment">-- and then compose the proofs (given that the pre-/post-conditions are sufficiently disjoint)</a>
+<a id="1614" class="Comment">-- to conclude something of a larger ledgers, namely any ledger that is an interleaving of the first two.</a>
+<a id="1720" class="Keyword">open</a> <a id="1725" class="Keyword">import</a> <a id="1732" href="CSL.html" class="Module">CSL</a>
+
+<a id="1737" class="Comment">-- ** An example of a ledger consisting of 4 transactions t₁⋯t₄,</a>
+<a id="1802" class="Comment">--    recording that values are correctly updated in pre-/post-conditions.</a>
+<a id="1877" class="Comment">-- 1. the first proof h repeatively uses the [FRAME] rule,</a>
+<a id="1936" class="Comment">--    but it quickly gets tedious because we need to reason about the whole ledger (all 4 transactions),</a>
+<a id="2041" class="Comment">--    although t₁ and t₃ act on a completely different set of participants than t₂ and t₄.</a>
+<a id="2132" class="Comment">-- 2. the second proof h′ utilizes modular reasoning via [PAR];</a>
+<a id="2196" class="Comment">--    we only prove smaller/simpler proofs for t₁/t₃ and t₂/t₄ and then compose them.</a>
+<a id="2282" class="Keyword">open</a> <a id="2287" class="Keyword">import</a> <a id="2294" href="Example.html" class="Module">Example</a>
+</pre></body></html>
