@@ -1,0 +1,5 @@
+name: hoare-utxo
+depend:
+  standard-library
+  formal-prelude
+include: .
